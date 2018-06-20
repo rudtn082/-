@@ -29,8 +29,9 @@
       <audio id="bgm2" type="audio/mp3" src="sound/bgm2.mp3" autoplay="false" loop="true" hidden="true" ></audio>
       <img class="sound_img2" id="sound_on2" src="img/sound_on.png" style="display:block" onclick="bgm2_function();"></img>
       <img class="sound_img2" id="sound_off2" src="img/sound_off.png" style="display:none" onclick="bgm2_function();"></img>
+      <!--아이템 사용 아이콘-->
       <img class="item" id="30s_1" src="img/30s_1.png" style="display:block" onclick="item_function();"></img>
-      <img class="item" id="30s_2" src="img/30s_2.png" style="display:none" onclick="item_function();"></img>
+      <img class="item" id="30s_2" src="img/30s_2.png" style="display:none"></img>
     </div>
     <!--문제그림 나오는 영역-->
     <div id="img_cont">
@@ -294,7 +295,8 @@
     </div>
     <!--게임 종료시 영역-->
     <div id="GameOver_UI">
-    	<button type="button" id="handle">랭킹 확인하기!</button>
+      <iframe id="rank" name="por" width="620" height="525" frameborder="0" scrolling="no"></iframe>
+      <form id="frm" method="post" action=""></form>
     </div>
   </article>
   <!--게임설명 클릭시 영역-->
@@ -306,7 +308,7 @@
       <br>총 15문제로 구성되어 랜덤 5개의 Stage가 등장합니다.
       <br>점수는 서버로 저장하여 플레이어끼리 비교할 수 있습니다.
       <br><br>
-      <br>사용언어 HTML, CSS, Javascript, Jquery, Jsp, Ajax
+      <br>사용언어는 HTML, CSS, Javascript, Jquery, Jsp입니다.
       <br>WebPrograming_01분반_Term_Project2
       <br>컴퓨터공학과 / 201604140 / 박경수
       <br><button id="close" onclick="explain_close();">닫기</button>

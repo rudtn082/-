@@ -255,3 +255,9 @@ img[usemap] {
   font-weight: bold;
   z-index: 2;
 }
+
+#rank {
+  position: absolute;
+  top: 14%;
+  left: 29.5%;
+}

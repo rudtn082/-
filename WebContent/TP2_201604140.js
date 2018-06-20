@@ -268,7 +268,13 @@ function timer_b() {
   document.getElementById("timer").innerHTML = count;
 }
 // 타이머
-
+// +30초 아이템 함수
+function item_function() {
+  count += 30;
+  document.getElementById("30s_1").style.display = "none";
+  document.getElementById("30s_2").style.display = "block";
+}
+// +30초 아이템 함수
 // 문제를 다 맞추었을 때 다음스테이지로 이동
 function stage_clear() {
   if(document.getElementById("remain").innerHTML == 0) { // 다 맞췄을 경우
@@ -342,8 +348,13 @@ function stage_pass() {
 function game_over(name) {
   var GameOver_UI = document.getElementById("GameOver_UI");
   GameOver_UI.style.transform = "translate(0,-100%)";
-  var handle = document.getElementById("handle");
-	var temp = "location.href='TP2_201604140.jsp?name=" + name +"'";
-  handle.setAttribute("onclick", temp);
+  //var handle = document.getElementById("handle");
+	var temp = "TP2_201604140.jsp?name=" + name + "&score=" + document.getElementById('score').innerHTML;
+  //var rtnVal = window.showModalDialog(temp, "", "dialogWidth:0; dialogHeight:0; help:no; status:no;");
+  //handle.setAttribute("onclick", temp);
+  var frm = document.getElementById('frm');
+  frm.target = "por"; // iframe의 이름
+  frm.action = "TP2_201604140.jsp?name=" + name + "&score=" + document.getElementById('score').innerHTML;
+  frm.submit();
 }
 // 게임 종료
