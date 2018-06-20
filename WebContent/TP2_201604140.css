@@ -1,0 +1,257 @@
+#back_main {
+  position: fixed;
+  background: url("img/main.jpg");
+  background-size: 100% 100%;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.sound_img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 7%;
+  width: 4%;
+  z-index: 2;
+}
+
+.sound_img:hover {
+  position: absolute;
+  cursor: pointer;
+  top: 20px;
+  right: 20px;
+  height: 7.5%;
+  width: 4.5%;
+  z-index: 2;
+}
+
+article #start_button {
+  position: absolute;
+  top: 70%;
+  left: 38%;
+  height: 7%;
+  width: 9%;
+  border-radius: 10%;
+  font-family: 'Stylish', sans-serif;
+  font-size: 170%;
+  font-weight: bold;
+  color: blue;
+  z-index: 2;
+}
+
+article #explain_button {
+  position: absolute;
+  top: 70%;
+  left: 53%;
+  height: 7%;
+  width: 9%;
+  border-radius: 10%;
+  font-family: 'Stylish', sans-serif;
+  font-size: 170%;
+  font-weight: bold;
+  color: blue;
+  z-index: 2;
+}
+
+#Game_UI {
+  position: fixed;
+  background: url("img/Game_UI.jpg");
+  background-size: 100% 100%;
+  top: 100%;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition-duration: 0.5s;
+  z-index: 2;
+}
+
+.sound_img2 {
+  position: absolute;
+  top: 80%;
+  right: 29%;
+  height: 7%;
+  width: 4%;
+  z-index: 4;
+}
+
+.sound_img2:hover {
+  position: absolute;
+  cursor: pointer;
+  top: 80%;
+  right: 29%;
+  height: 7.5%;
+  width: 4.5%;
+  z-index: 4;
+}
+
+.item {
+  position: absolute;
+  top: 78%;
+  right: 37%;
+  height: 13%;
+  width: 6%;
+  z-index: 4;
+}
+
+.item:hover {
+  position: absolute;
+  cursor: pointer;
+  top: 78%;
+  right: 37%;
+  height: 13.5%;
+  width: 6.5%;
+  z-index: 4;
+}
+
+#img_cont {
+  height: 62.7%;
+  width: 95.9%;
+  position: absolute;
+  background: none;
+  margin-top: 2.3%;
+  margin-left: 1.5%;
+  z-index: 2;
+  overflow:hidden;
+}
+
+#Q1,#Q2,#Q3,#Q4,#Q5,#Q6,#Q7,#Q8,#Q9,#Q10,#Q11,#Q12,#Q13,#Q14,#Q15 {
+  position: absolute;
+  width: 50%;
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 2;
+}
+
+#A1,#A2,#A3,#A4,#A5,#A6,#A7,#A8,#A9,#A10,#A11,#A12,#A13,#A14,#A15 {
+  position: absolute;
+  width: 50%;
+  left: 50.3%;
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 2;
+}
+
+#stage_clear {
+  position: absolute;
+  width: 68%;
+  height: 70%;
+  top: 10%;
+  left: 15.5%;
+  z-index: 3;
+}
+
+#time_over {
+  position: absolute;
+  width: 68%;
+  height: 70%;
+  top: 10%;
+  left: 15.5%;
+  z-index: 3;
+}
+
+img[usemap] {
+		border: none;
+		height: auto;
+		max-width: 100%;
+		width: auto;
+    cursor:  pointer;
+	}
+
+#GameOver_UI {
+    position: fixed;
+    background: url("img/GameOver_UI.jpg");
+    background-size: 100% 100%;
+    top: 100%;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    transition-duration: 0.5s;
+    z-index: 5;
+}
+
+#handle {
+  position: absolute;
+  top: 50%;
+  left: 43%;
+  height: 10%;
+  width: 15%;
+  border-radius: 10px;
+  font-family: 'Stylish', sans-serif;
+  font-size: 200%;
+  font-weight: bold;
+  color: blue;
+  z-index: 5;
+}
+
+#explain {
+  position: fixed;
+  background-color: rgba(0,0,0,0.7);
+  background-size: 100% 100%;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+#explain_cont {
+  position: fixed;
+  background-color: AliceBlue;
+  border-radius: 5%;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 55%;
+  font-family: 'Stylish', sans-serif;
+  font-size: 150%;
+  color: black;
+  text-align: center;
+  z-index: 2;
+}
+
+#close {
+  height: 10%;
+  width: 10%;
+  border-radius: 15%;
+  font-family: 'Stylish', sans-serif;
+  font-size: 100%;
+  font-weight: bold;
+  color: blue;
+  z-index: 2;
+}
+
+#score {
+  position: absolute;
+  top: 72%;
+  left: 12%;
+  font-family: 'Stylish', sans-serif;
+  font-size: 350%;
+  font-weight: bold;
+  z-index: 2;
+}
+
+#timer {
+  position: absolute;
+  top: 69%;
+  left: 43.5%;
+  font-family: 'Stylish', sans-serif;
+  font-size: 400%;
+  font-weight: bold;
+  z-index: 2;
+}
+
+#remain {
+  position: absolute;
+  top: 69%;
+  left: 90.5%;
+  font-family: 'Stylish', sans-serif;
+  font-size: 400%;
+  font-weight: bold;
+  z-index: 2;
+}

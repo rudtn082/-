@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="TP2_201604140.css">
+  <link href="https://fonts.googleapis.com/css?family=Stylish" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>충남대학교 틀린그림찾기</title>
+</head>
+<body>
+  <!--(header)처음 화면과 bgm, 이미지 화면에 출력-->
+  <header>
+    <div id="back_main"></div>
+    <!--배경 bgm-->
+    <audio id="bgm1" type="audio/mp3" src="sound/bgm1.mp3" autoplay="true" loop="true" hidden="true" ></audio>
+    <img class="sound_img" id="sound_on" src="img/sound_on.png" style="display:block" onclick="bgm_function();"></img>
+    <img class="sound_img" id="sound_off" src="img/sound_off.png" style="display:none" onclick="bgm_function();"></img>
+    <!--게임 효과음-->
+    <audio id="clear_bgm" type="audio/mp3" src="sound/clear.mp3" autoplay="false" hidden="true" ></audio>
+    <audio id="correct_bgm" type="audio/mp3" src="sound/correct.mp3" autoplay="false" hidden="true" ></audio>
+  </header>
+  <!--게임시작 클릭시 영역-->
+  <article>
+    <button id="start_button" onclick="start();">게임시작</button>
+    <button id="explain_button" onclick="explain();">게임설명</button>
+    <div id="Game_UI">
+      <!--게임 시작 bgm-->
+      <audio id="bgm2" type="audio/mp3" src="sound/bgm2.mp3" autoplay="false" loop="true" hidden="true" ></audio>
+      <img class="sound_img2" id="sound_on2" src="img/sound_on.png" style="display:block" onclick="bgm2_function();"></img>
+      <img class="sound_img2" id="sound_off2" src="img/sound_off.png" style="display:none" onclick="bgm2_function();"></img>
+      <img class="item" id="30s_1" src="img/30s_1.png" style="display:block" onclick="item_function();"></img>
+      <img class="item" id="30s_2" src="img/30s_2.png" style="display:none" onclick="item_function();"></img>
+    </div>
+    <!--문제그림 나오는 영역-->
+    <div id="img_cont">
+      <img id="stage_clear" src="img/stage_clear.png" style="display:none" draggable="false"/>
+      <img id="time_over" src="img/time_over.png" style="display:none" draggable="false"/>
+      <!--문제 1번-->
+      <img class="Question" id="Q1" src="img/Q1.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-05-23-061826" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-05-23-061826" id="ImageMapsCom-image-maps-2018-05-23-061826">
+        <area onclick="correct(this);" shape="rect" coords="280,427,294,487" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="420,787,431,832" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="493,704,565,732" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="968,609,978,729" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1441,417,1484,440" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A1" src="img/A1.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-05-23-061826" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-05-23-061826" id="ImageMapsCom-image-maps-2018-05-23-061826">
+        <area onclick="correct(this);" shape="rect" coords="280,427,294,487" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="420,787,431,832" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="493,704,565,732" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="968,609,978,729" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1441,417,1484,440" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 2번-->
+      <img class="Question" id="Q2" src="img/Q2.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-15-040620" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-15-040620" id="ImageMapsCom-image-maps-2018-06-15-040620">
+        <area onclick="correct(this);" shape="rect" coords="253,483,278,508" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="649,451,660,558" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1120,855,1147,891" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="720,863,740,899" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="293,951,333,999" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A2" src="img/A2.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-15-040620" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-15-040620" id="ImageMapsCom-image-maps-2018-06-15-040620">
+        <area onclick="correct(this);" shape="rect" coords="253,483,278,508" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="649,451,660,558" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1120,855,1147,891" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="720,863,740,899" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="293,951,333,999" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 3번-->
+      <img class="Question" id="Q3" src="img/Q3.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-15-044506" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-15-044506" id="ImageMapsCom-image-maps-2018-06-15-044506">
+        <area onclick="correct(this);" shape="rect" coords="1087,467,1124,505" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1037,948,1051,999" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="492,853,524,979" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1447,899,1489,932" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="poly" coords="849,491,848,504,837,516,818,525,793,543,774,556,764,559,759,543,788,532,812,519,827,502" style="outline:none;" />
+      </map>
+      <img class="Answer" id="A3" src="img/A3.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-15-044506" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-15-044506" id="ImageMapsCom-image-maps-2018-06-15-044506">
+        <area onclick="correct(this);" shape="rect" coords="1087,467,1124,505" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1037,948,1051,999" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="492,853,524,979" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1447,899,1489,932" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="poly" coords="849,491,848,504,837,516,818,525,793,543,774,556,764,559,759,543,788,532,812,519,827,502" style="outline:none;" />
+      </map>
+      <!--문제 4번-->
+      <img class="Question" id="Q4" src="img/Q4.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-15-045854" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-15-045854" id="ImageMapsCom-image-maps-2018-06-15-045854">
+        <area onclick="correct(this);" shape="rect" coords="0,294,45,361" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="713,85,736,116" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="765,371,820,434" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1004,738,1023,878" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1144,463,1200,528" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A4" src="img/A4.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-15-045854" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-15-045854" id="ImageMapsCom-image-maps-2018-06-15-045854">
+        <area onclick="correct(this);" shape="rect" coords="0,294,45,361" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="713,85,736,116" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="765,371,820,434" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1004,738,1023,878" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1144,463,1200,528" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 5번-->
+      <img class="Question" id="Q5" src="img/Q5.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-15-060909" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-15-060909" id="ImageMapsCom-image-maps-2018-06-15-060909">
+        <area onclick="correct(this);" shape="rect" coords="218,179,277,219" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="490,447,554,487" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="123,802,213,841" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="918,863,972,895" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1056,183,1100,203" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A5" src="img/A5.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-15-060909" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-15-060909" id="ImageMapsCom-image-maps-2018-06-15-060909">
+        <area onclick="correct(this);" shape="rect" coords="218,179,277,219" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="490,447,554,487" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="123,802,213,841" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="918,863,972,895" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1056,183,1100,203" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 6번-->
+      <img class="Question" id="Q6" src="img/Q6.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-064448" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-064448" id="ImageMapsCom-image-maps-2018-06-19-064448">
+        <area onclick="correct(this);" shape="rect" coords="5,35,47,92" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="412,468,434,501" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="514,436,580,474" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1264,452,1285,495" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1357,234,1384,263" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A6" src="img/A6.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-064448" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-064448" id="ImageMapsCom-image-maps-2018-06-19-064448">
+        <area onclick="correct(this);" shape="rect" coords="5,35,47,92" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="345,475,391,492" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="514,436,580,474" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1264,452,1285,495" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1357,234,1384,263" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 7번-->
+      <img class="Question" id="Q7" src="img/Q7.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-071210" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-071210" id="ImageMapsCom-image-maps-2018-06-19-071210">
+        <area onclick="correct(this);" shape="rect" coords="477,962,524,1031" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="610,823,752,985" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1260,528,1297,574" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1192,349,1223,371" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="123,909,164,955" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A7" src="img/A7.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-071210" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-071210" id="ImageMapsCom-image-maps-2018-06-19-071210">
+        <area onclick="correct(this);" shape="rect" coords="477,962,524,1031" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="610,823,752,985" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1260,528,1297,574" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1192,349,1223,371" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="123,909,164,955" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 8번-->
+      <img class="Question" id="Q8" src="img/Q8.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-073023" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-073023" id="ImageMapsCom-image-maps-2018-06-19-073023">
+        <area onclick="correct(this);" shape="rect" coords="726,795,806,848" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="97,1134,177,1193" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="981,483,1013,525" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1102,351,1114,377" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="773,1020,898,1152" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A8" src="img/A8.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-073023" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-073023" id="ImageMapsCom-image-maps-2018-06-19-073023">
+        <area onclick="correct(this);" shape="rect" coords="726,795,806,848" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="97,1134,177,1193" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="981,483,1013,525" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1102,351,1114,377" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="773,1020,898,1152" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 9번-->
+      <img class="Question" id="Q9" src="img/Q9.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-083552" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-083552" id="ImageMapsCom-image-maps-2018-06-19-083552">
+        <area onclick="correct(this);" shape="rect" coords="288,495,472,518" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1149,457,1196,487" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="477,1049,533,1188" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1384,611,1452,651" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="415,576,451,595" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A9" src="img/A9.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-083552" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-083552" id="ImageMapsCom-image-maps-2018-06-19-083552">
+        <area onclick="correct(this);" shape="rect" coords="288,495,472,518" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1149,457,1196,487" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="477,1049,533,1188" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1384,611,1452,651" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="415,576,451,595" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 10번-->
+      <img class="Question" id="Q10" src="img/Q10.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-092917" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-092917" id="ImageMapsCom-image-maps-2018-06-19-092917">
+        <area onclick="correct(this);" shape="rect" coords="773,850,797,881" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1161,835,1204,901" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1051,586,1104,650" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="22,999,96,1031" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="12,707,93,747" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A10" src="img/A10.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-092917" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-092917" id="ImageMapsCom-image-maps-2018-06-19-092917">
+        <area onclick="correct(this);" shape="rect" coords="773,850,797,881" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1161,835,1204,901" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1051,586,1104,650" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="22,999,96,1031" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="12,707,93,747" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 11번-->
+      <img class="Question" id="Q11" src="img/Q11.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-095006" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-095006" id="ImageMapsCom-image-maps-2018-06-19-095006">
+        <area onclick="correct(this);" shape="rect" coords="749,1019,831,1100" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="670,775,700,832" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="929,627,965,728" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1361,297,1394,332" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1520,138,1628,183" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A11" src="img/A11.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-095006" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-095006" id="ImageMapsCom-image-maps-2018-06-19-095006">
+        <area onclick="correct(this);" shape="rect" coords="749,1019,831,1100" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="670,775,700,832" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="929,627,965,728" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1361,297,1394,332" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1520,138,1628,183" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 12번-->
+      <img class="Question" id="Q12" src="img/Q12.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-102300" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-102300" id="ImageMapsCom-image-maps-2018-06-19-102300">
+        <area onclick="correct(this);" shape="rect" coords="765,368,789,407" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1136,136,1200,238" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="656,1036,712,1046" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="187,635,295,718" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1380,923,1416,959" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A12" src="img/A12.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-102300" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-102300" id="ImageMapsCom-image-maps-2018-06-19-102300">
+        <area onclick="correct(this);" shape="rect" coords="765,368,789,407" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1136,136,1200,238" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="656,1036,712,1046" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="187,635,295,718" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1380,923,1416,959" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 13번-->
+      <img class="Question" id="Q13" src="img/Q13.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-142850" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-142850" id="ImageMapsCom-image-maps-2018-06-19-142850">
+        <area onclick="correct(this);" shape="rect" coords="4,1040,116,1187" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="570,725,587,784" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="696,236,876,349" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1165,978,1242,1034" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="480,520,539,599" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A13" src="img/A13.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-142850" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-142850" id="ImageMapsCom-image-maps-2018-06-19-142850">
+        <area onclick="correct(this);" shape="rect" coords="4,1040,116,1187" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="570,725,587,784" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="696,236,876,349" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1165,978,1242,1034" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="480,520,539,599" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 14번-->
+      <img class="Question" id="Q14" src="img/Q14.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-140309" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-140309" id="ImageMapsCom-image-maps-2018-06-19-140309">
+        <area onclick="correct(this);" shape="rect" coords="713,374,744,399" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="933,1119,981,1155" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="3,1131,41,1193" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1420,966,1489,1018" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1039,1051,1065,1114" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A14" src="img/A14.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-140309" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-140309" id="ImageMapsCom-image-maps-2018-06-19-140309">
+        <area onclick="correct(this);" shape="rect" coords="713,374,744,399" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="933,1119,981,1155" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="3,1131,41,1193" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1420,966,1489,1018" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1039,1051,1065,1114" style="outline:none;" target="_self"     />
+      </map>
+      <!--문제 15번-->
+      <img class="Question" id="Q15" src="img/Q15.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-100329" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-100329" id="ImageMapsCom-image-maps-2018-06-19-100329">
+        <area onclick="correct(this);" shape="rect" coords="656,575,674,594" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1144,937,1220,993" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="196,722,221,747" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="359,871,385,905" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="304,738,322,755" style="outline:none;" target="_self"     />
+      </map>
+      <img class="Answer" id="A15" src="img/A15.jpg" border="0" width="1632" height="1193" orgWidth="1632" orgHeight="1193" usemap="#image-maps-2018-06-19-100329" style="display:none" oncontextmenu="return false" draggable="false"/>
+      <map name="image-maps-2018-06-19-100329" id="ImageMapsCom-image-maps-2018-06-19-100329">
+        <area onclick="correct(this);" shape="rect" coords="656,575,674,594" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="1144,937,1220,993" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="196,722,221,747" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="359,871,385,905" style="outline:none;" target="_self"     />
+        <area onclick="correct(this);" shape="rect" coords="304,738,322,755" style="outline:none;" target="_self"     />
+      </map>
+    </div>
+    <!--게임 종료시 영역-->
+    <div id="GameOver_UI">
+    	<button type="button" id="handle">랭킹 확인하기!</button>
+    </div>
+  </article>
+  <!--게임설명 클릭시 영역-->
+  <section id="explain" style="display:none">
+    <div id="explain_cont">
+      이 게임은 충남대학교 사진을 이용한 틀린그림찾기 게임입니다.
+      <br>정답을 맞추면 Score는 200점을 얻고
+      <br>Stage를 클리어하면 초당 30점을 얻을 수 있습니다.
+      <br>총 15문제로 구성되어 랜덤 5개의 Stage가 등장합니다.
+      <br>점수는 서버로 저장하여 플레이어끼리 비교할 수 있습니다.
+      <br><br>
+      <br>사용언어 HTML, CSS, Javascript, Jquery, Jsp, Ajax
+      <br>WebPrograming_01분반_Term_Project2
+      <br>컴퓨터공학과 / 201604140 / 박경수
+      <br><button id="close" onclick="explain_close();">닫기</button>
+    </div>
+  </section>
+  <!--스코어, 시간초, 남은개수 출력 영역-->
+  <aside>
+    <p id="score" style="display:none">0</p>
+    <p id="timer" style="display:none">60</p>
+    <p id="remain" style="display:none">0</p>
+  </aside>
+  <!--동적 이미지 맵핑 import-->
+  <script src="jquery.rwdImageMaps.js"></script>
+  <script type = "text/javascript" src="TP2_201604140.js"></script>
+</body>
+</html>
