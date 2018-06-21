@@ -1,4 +1,4 @@
-// 시작 시 게임 bgm
+// 시작 시 게임 bgm끄기
 $( document ).ready(function() {
   var bgm2 = document.getElementById("bgm2");
   var clear_bgm = document.getElementById("clear_bgm");
@@ -7,14 +7,13 @@ $( document ).ready(function() {
   clear_bgm.pause();
   correct_bgm.pause();
 });
-
 // 시작 시 게임 bgm끄기
 // 동적 이미지 맵핑을 위한 코드
 $(document).ready(function(e) {
     $('img[usemap]').rwdImageMaps();
 });
 // 동적 이미지 맵핑을 위한 코드
-// 음악 이미지 클릭 시 켜고 끄기
+// 음악 이미지 클릭 시 켜고 끄기(bgm1)
 function bgm_function() {
   var bgm1 = document.getElementById("bgm1");
   if(document.getElementById("sound_on").style.display == "block") {
@@ -28,8 +27,8 @@ function bgm_function() {
     bgm1.play();
   }
 }
-// 음악 이미지 클릭 시 켜고 끄기
-// 음악 이미지 클릭 시 켜고 끄기
+// 음악 이미지 클릭 시 켜고 끄기(bgm1)
+// 음악 이미지 클릭 시 켜고 끄기(bgm2)
 function bgm2_function() {
   var bgm2 = document.getElementById("bgm2");
   if(document.getElementById("sound_on2").style.display == "block") {
@@ -43,9 +42,9 @@ function bgm2_function() {
     bgm2.play();
   }
 }
-// 음악 이미지 클릭 시 켜고 끄기
+// 음악 이미지 클릭 시 켜고 끄기(bgm2)
 var question_array = new Array(); // 문제를 넣을 배열
-var remain_stage = 4;
+var remain_stage = 4; // 5문제
 // 게임시작 눌렀을 때 화면 변경
 function start() {
   var bgm1 = document.getElementById("bgm1");
@@ -201,7 +200,6 @@ function resizeDone(){
 
    for (var i = 0; i < stra.length; i++) {
       var coords_str = $(stra[i]).attr("coords");
-      alert(coords_str);
       var strArray = coords_str.split(',');
 
       var img = document.createElement("img");
@@ -292,6 +290,7 @@ function stage_clear() {
     }, 1500);
     if(remain_stage == 0) { // 5 스테이지 모두 끝났을 경우
       setTimeout(function() {
+        var pattern = /[-=!@#$%^&*()_+|<>?:{}]/;	// 특수문자
         while(1) {
           var name = prompt("닉네임을 입력해주세요!");
           if(name == null) {
@@ -300,6 +299,10 @@ function stage_clear() {
           }
           else if(isNaN(name) == false) {
             alert("문자로 입력해주세요");
+            continue;
+          }
+          else if(pattern.test(name) == true) {
+            alert("포함할 수 없는 문자열이 있습니다.");
             continue;
           }
           else {
@@ -325,6 +328,7 @@ function stage_pass() {
   }, 1500);
   if(remain_stage == 0) { // 5 스테이지 모두 끝났을 경우
     setTimeout(function() {
+      var pattern = /[-=!@#$%^&*()_+|<>?:{}]/;	// 특수문자
       while(1) {
         var name = prompt("닉네임을 입력해주세요!");
         if(name == null) {
@@ -333,6 +337,10 @@ function stage_pass() {
         }
         else if(isNaN(name) == false) {
           alert("문자로 입력해주세요");
+          continue;
+        }
+        else if(pattern.test(name) == true) {
+          alert("포함할 수 없는 문자열이 있습니다.");
           continue;
         }
         else {
@@ -348,12 +356,8 @@ function stage_pass() {
 function game_over(name) {
   var GameOver_UI = document.getElementById("GameOver_UI");
   GameOver_UI.style.transform = "translate(0,-100%)";
-  //var handle = document.getElementById("handle");
-	var temp = "TP2_201604140.jsp?name=" + name + "&score=" + document.getElementById('score').innerHTML;
-  //var rtnVal = window.showModalDialog(temp, "", "dialogWidth:0; dialogHeight:0; help:no; status:no;");
-  //handle.setAttribute("onclick", temp);
   var frm = document.getElementById('frm');
-  frm.target = "por"; // iframe의 이름
+  frm.target = "rank";
   frm.action = "TP2_201604140.jsp?name=" + name + "&score=" + document.getElementById('score').innerHTML;
   frm.submit();
 }
